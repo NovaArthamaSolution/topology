@@ -133,35 +133,35 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     { bgColor: string; borderColor: string }
   > = {
     OnPremise: {
-      bgColor: "hsl(var(--card))",
+      bgColor: "white",
       borderColor: "hsl(var(--primary))",
     },
     Cloud: {
-      bgColor: "hsl(var(--muted))",
+      bgColor: "skyblue",
       borderColor: "hsl(var(--secondary))",
     },
     Containment: {
-      bgColor: "hsl(var(--accent))",
+      bgColor: "lightgray",
       borderColor: "hsl(var(--accent-foreground))",
     },
     Rack: {
-      bgColor: "hsl(var(--background))",
+      bgColor: "lightyellow",
       borderColor: "hsl(var(--border))",
     },
     Server: {
-      bgColor: "hsl(var(--card))",
+      bgColor: "white",
       borderColor: "hsl(var(--destructive))",
     },
     "Cloud Account": {
-      bgColor: "hsl(var(--muted))",
+      bgColor: "skyblue",
       borderColor: "hsl(var(--muted-foreground))",
     },
     "Cloud Instance": {
-      bgColor: "hsl(var(--card))",
+      bgColor: "white",
       borderColor: "hsl(var(--secondary))",
     },
     "Cloud Service": {
-      bgColor: "hsl(var(--accent))",
+      bgColor: "skyblue",
       borderColor: "hsl(var(--accent-foreground))",
     },
   };
@@ -416,15 +416,16 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         onConnect={onConnect}
         nodeTypes={{ custom: CustomNode }}
         fitView
-        colorMode="dark"
+        // colorMode="dark"
+        draggable
       >
         <Background />
-        <Controls />
+        <Controls showInteractive={false} />
         <MiniMap />
       </ReactFlow>
       <div className="absolute top-4 left-4 flex items-center space-x-2">
         {history.length > 0 && (
-          <Button onClick={goBack} variant="outline">
+          <Button onClick={goBack} variant="outline" className="text-white">
             Back
           </Button>
         )}
@@ -435,7 +436,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
                 <BreadcrumbItem>
                   <BreadcrumbLink
                     onClick={() => handleBreadcrumbClick(crumb.id)}
-                    className="cursor-pointer hover:underline"
+                    className="cursor-pointer hover:underline text-white text-2xl"
                   >
                     {crumb.label}
                   </BreadcrumbLink>
@@ -450,7 +451,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         <Button
           onClick={() => setLevel((prev) => prev + 1)}
           variant="outline"
-          className="absolute top-4 right-4"
+          className="absolute top-4 right-4 text-white"
         >
           Show Next Level (Current: {level})
         </Button>
