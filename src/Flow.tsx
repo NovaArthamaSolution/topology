@@ -166,7 +166,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     },
   };
 
-  const getEdgeStyle = (sourceNode?: AssetNode, targetNode?: AssetNode) => {
+  const getEdgeStyle = (_sourceNode?: AssetNode, targetNode?: AssetNode) => {
     const classType = targetNode?.Class || "default";
     const styleMap: Record<string, React.CSSProperties> = {
       Server: { stroke: "hsl(var(--destructive))", strokeWidth: 2 },
@@ -261,7 +261,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     const processNode = (
       node: AssetNode,
       inferredLevel: number = node.level || 1,
-      nodeIndex: number
+      _nodeIndex: number
     ) => {
       const nodeLevel =
         node.level !== null && node.level !== undefined
