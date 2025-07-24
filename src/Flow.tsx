@@ -249,7 +249,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         currentId = node.parentId;
       } else break;
     }
-    breadcrumbs.unshift({ id: null, label: "Root" });
+    breadcrumbs.unshift({ id: null, label: "Infrastruktur SIMKIM" });
     return breadcrumbs;
   }, [currentParentId, findNode]);
 
