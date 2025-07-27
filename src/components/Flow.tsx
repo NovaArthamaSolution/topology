@@ -69,18 +69,6 @@ export type AssetNode = {
   children?: AssetNode[];
 };
 
-type CustomNodeProps = {
-  id: string;
-  data: {
-    label: string;
-    Class: string;
-    icon?: React.ReactNode;
-    bgColor: string;
-    borderColor: string;
-    children?: AssetNode[];
-  };
-};
-
 type FlowProps = {
   data: AssetNode[];
 };
