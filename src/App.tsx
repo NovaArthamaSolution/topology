@@ -61,7 +61,7 @@ function App() {
   };
 
   useEffect(() => {
-    const url = process.env.REACT_APP_CSV_URL || ''
+    const url = import.meta.env.VITE_CSV_URL || ''
     fetch(url, {
       headers: {
         'Accept': 'text/csv',
