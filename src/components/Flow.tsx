@@ -14,15 +14,10 @@ import {
   type Connection,
   type NodeMouseHandler,
 } from "@xyflow/react";
-import { useSpring, animated } from "@react-spring/web";
 import {
   FaBuilding,
-  FaCloud,
-  FaServer,
   FaDatabase,
-  FaNetworkWired,
   FaShare,
-  FaLock,
   FaBriefcase,
   FaEnvelope,
   FaDesktop,
@@ -44,22 +39,21 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import * as Tooltip from "@radix-ui/react-tooltip";
 import "@xyflow/react/dist/style.css";
 import AWSIcon from "../assets/icons/aws";
 import GCPIcon from "../assets/icons/gcp";
 import RackIcon from "../assets/icons/rack";
 import DellEmcIcon from "../assets/icons/dellemc";
 import HPEIcon from "../assets/icons/hpe";
-import PostgresIcon from "../assets/icons/PostgreSQL";
 import KubernetesIcon from "../assets/icons/kubernetes";
 import EC2Icon from "../assets/icons/ec2";
 import NetBoxIcon from "../assets/icons/netbox";
 import BigQueryIcon from "../assets/icons/bigquery";
 import ContainmentIcon from "../assets/icons/containment";
 import CustomNode from "./Nodes";
-import MySQLIcon from "@/assets/icons/Mysql";
 import HPEIconAlt from "@/assets/icons/hpe-alt";
+import PostgresIcon from "@/assets/icons/postgresql";
+import MySQLIcon from "@/assets/icons/mysql";
 
 export type AssetNode = {
   NodeId: number;
