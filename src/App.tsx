@@ -61,7 +61,11 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("/data.csv")
+    fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vQpL0np6jDCC5qX0wFmedkKOKSdFPWPuvhuLFajgKB_mP_RzcEqQzYLaC0ofuJMBlM0oS88XH0N1ksm/pub?gid=0&single=true&output=csv", {
+      headers: {
+        'Accept': 'text/csv',
+      },
+    })
       .then((response) => {
         if (!response.ok) throw new Error("Failed to fetch CSV");
         return response.text();
