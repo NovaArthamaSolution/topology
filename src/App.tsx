@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
 import _ from "lodash";
-import Flow from "./Flow";
+import Flow from "./components/Flow";
 import "./App.css";
 
 type RawData = {
