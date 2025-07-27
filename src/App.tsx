@@ -61,7 +61,8 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vQpL0np6jDCC5qX0wFmedkKOKSdFPWPuvhuLFajgKB_mP_RzcEqQzYLaC0ofuJMBlM0oS88XH0N1ksm/pub?gid=0&single=true&output=csv", {
+    const url = process.env.REACT_APP_CSV_URL || ''
+    fetch(url, {
       headers: {
         'Accept': 'text/csv',
       },

@@ -23,6 +23,8 @@ jobs:
       working-directory: ./
 
     - name: Build project
+      env:
+        REACT_APP_CSV_URL: ${{ secrets.CSV_URL }}
       run: npm run build
       working-directory: ./
 
