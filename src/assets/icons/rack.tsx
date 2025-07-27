@@ -1,4 +1,3 @@
-import * as React from "react";
 const RackIcon = ({width, height} : {width?: number; height?: number}) => (
   <svg
     fill="#000000"

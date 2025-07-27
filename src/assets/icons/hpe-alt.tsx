@@ -1,4 +1,3 @@
-import * as React from "react";
 const HPEIconAlt = ({width, height} : {width?: number; height?: number}) => (
   <svg
     id="katman_1"

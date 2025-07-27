@@ -1,4 +1,3 @@
-import * as React from "react";
 const DellEmcIcon = ({width, height} : {width?: number, height?: number}) => (
   <svg xmlns="http://www.w3.org/2000/svg" height={height} width={width}>
     <path

@@ -1,4 +1,3 @@
-import * as React from "react";
 const EC2Icon = ({width, height} : {width?: number, height?: number}) => (
   <svg
     width={width}

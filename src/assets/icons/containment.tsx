@@ -1,4 +1,3 @@
-import * as React from "react";
 const ContainmentIcon = ({width, height}: {width?: number; height?: number}) => (
   <svg
     fill="#000000"

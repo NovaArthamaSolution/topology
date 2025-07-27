@@ -1,5 +1,3 @@
-import * as React from "react";
-
 const BigQueryIcon = ({
   width = 64,
   height = 64,
