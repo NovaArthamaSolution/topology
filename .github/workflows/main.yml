@@ -42,3 +42,10 @@ jobs:
     - name: Invalidate CloudFront cache
       run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
       working-directory: ./
+
+    - name: Deploy Lambda
+      working-directory: lambda
+      run: |
+        npm install --production
+        zip -r ./lambda.zip
+        aws lambda update-function-code --function-name topview --zip-file fileb://./lambda.zip

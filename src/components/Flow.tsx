@@ -172,32 +172,32 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     nodeIndex: number
   ) => {
     if (positionTag && positionTag !== "x,y") {
+      if (positionTag.startsWith("L") ) {
+        const match = positionTag.match(/[LR](\d+)/);
+        if (match)
+          positionTag = match[1] + ":1"
+      }
+      if (positionTag.startsWith("R")) { 
+        const match = positionTag.match(/[LR](\d+)/);
+        if (match) 
+          positionTag = match[1] + ":3"
+      }
+       
+      if (positionTag.startsWith("U")) {
+        const match = positionTag.match(/U(\d+)(?:-(\d+))?/);
+        if (match) {
+          const unit = Number(match[1]);
+          return { x: 300, y: unit * 50 };
+        }
+      }
+  
       if (positionTag.includes(":")) {
         const [row, col] = positionTag.split(":").map(Number);
         if (!isNaN(row) && !isNaN(col)) {
           return { x: col * 200, y: row * 100 };
         }
       }
-      if (positionTag.startsWith("U")) {
-        const match = positionTag.match(/U(\d+)(?:-(\d+))?/);
-        if (match) {
-          const unit = Number(match[1]);
-          return { x: nodeLevel * 300 + nodeIndex * 200, y: unit * 50 };
-        }
-      }
-      if (positionTag.startsWith("L") || positionTag.startsWith("R")) {
-        const match = positionTag.match(/[LR](\d+)/);
-        if (match) {
-          const index = Number(match[1]);
-          return {
-            x:
-              nodeLevel * 300 +
-              (positionTag.startsWith("L") ? -100 : 100) +
-              nodeIndex * 200,
-            y: index * 100,
-          };
-        }
-      }
+      
     }
     return { x: nodeLevel * 300 + nodeIndex * 200, y: 0 };
   };
@@ -238,7 +238,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         currentId = node.parentId;
       } else break;
     }
-    breadcrumbs.unshift({ id: null, label: "Root" });
+    breadcrumbs.unshift({ id: null, label: "Infrastruktur SIMKIM" });
     return breadcrumbs;
   }, [currentParentId, findNode]);
 
