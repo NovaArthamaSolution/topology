@@ -30,6 +30,8 @@ import {
   FaChartLine,
   FaGlobe,
   FaShield,
+  FaArrowDownUpLock,
+  FaCloud,
 } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import {
@@ -87,6 +89,9 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   const iconMap: Record<string, React.ReactNode> = {
+    sdwan: <FaArrowDownUpLock />,
+    cloud: <FaCloud/>,
+    globe: <FaGlobe />,
     building: <FaBuilding />,
     aws: <AWSIcon color="#000" width={24} />,
     gcp: <GCPIcon width={24} />,
@@ -186,8 +191,10 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
       if (positionTag.startsWith("U")) {
         const match = positionTag.match(/U(\d+)(?:-(\d+))?/);
         if (match) {
-          const unit = Number(match[1]);
-          return { x: 300, y: unit * 50 };
+          const bottom = Number(match[1]);
+          const top = Number(match[2]);
+          const unit = top - bottom;
+          return { x: 300, y: unit * 48 };
         }
       }
   
