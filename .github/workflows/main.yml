@@ -47,5 +47,5 @@ jobs:
       working-directory: ./lambda
       run: |
         npm install --production
-        zip -r ./lambda.zip
+        zip -r ./lambda.zip .
         aws lambda update-function-code --function-name topview --zip-file fileb://./lambda.zip
