@@ -44,7 +44,7 @@ jobs:
       working-directory: ./
 
     - name: Deploy Lambda
-      working-directory: lambda
+      working-directory: ./lambda
       run: |
         npm install --production
         zip -r ./lambda.zip
