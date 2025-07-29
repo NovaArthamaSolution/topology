@@ -80,7 +80,7 @@ type HistoryState = {
 };
 
 const Flow: React.FC<FlowProps> = ({ data }) => {
-  #const [level, setLevel] = useState<number>(1);
+/* const [level, setLevel] = useState<number>(1); */
   const [currentParentId, setCurrentParentId] = useState<number | null>(null);
   const [history, setHistory] = useState<HistoryState[]>([]);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
