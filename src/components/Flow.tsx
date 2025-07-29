@@ -439,13 +439,13 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         </Breadcrumb>
       </div>
       {!currentParentId && (
-        <Button
+        <!--Button
           onClick={() => setLevel((prev) => prev + 1)}
           variant="outline"
           className="absolute top-4 right-4 text-white"
         >
           Show Next Level (Current: {level})
-        </Button>
+        </Button-->
       )}
     </div>
   );
