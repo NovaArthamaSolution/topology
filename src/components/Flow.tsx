@@ -445,7 +445,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
           className="absolute top-4 right-4 text-white"
           disabled
         >
-          Show Next Level (Current: {level})
+        Level: {level}
         </Button>
       )}
     </div>
