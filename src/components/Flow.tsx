@@ -80,7 +80,7 @@ type HistoryState = {
 };
 
 const Flow: React.FC<FlowProps> = ({ data }) => {
-/* const [level, setLevel] = useState<number>(1); */
+  const [level, setLevel] = useState<number>(1); 
   const [currentParentId, setCurrentParentId] = useState<number | null>(null);
   const [history, setHistory] = useState<HistoryState[]>([]);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -438,6 +438,16 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
+      {!currentParentId && (
+        <Button
+          onClick={() => setLevel((prev) => prev + 1)}
+          variant="outline"
+          className="absolute top-4 right-4 text-white"
+          disabled
+        >
+          Show Next Level (Current: {level})
+        </Button>
+      )}
     </div>
   );
 };
