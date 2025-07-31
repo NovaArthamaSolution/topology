@@ -2,6 +2,7 @@
   "name": "topview-lambda",
   "version": "1.0.0",
   "main": "index.js",
+  "test": "test.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +11,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "dotenv": "^17.2.1",
     "google-auth-library": "^10.2.0",
-    "google-spreadsheet": "^4.1.5"
-  },
-  "devDependencies": {}
+    "google-spreadsheet": "^4.1.5",
+    "googleapis": "^154.1.0"
+  }
 }
