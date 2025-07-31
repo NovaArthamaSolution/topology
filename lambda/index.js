@@ -2,7 +2,7 @@ const { google } = require("googleapis");
 const creds = JSON.parse(atob(process.env.SA_KEY_FILE))
 
 // Or embed it directly
-exports.main = async (event) => {
+exports.handler = async (event) => {
     try {
         const auth = new google.auth.GoogleAuth({
                 credentials: creds,
@@ -74,5 +74,5 @@ function columnToIndex(col) {
 
 
 if (process.argv[1].indexOf('index.js') !== -1) {
-    exports.main({});
+    exports.handler({});
 }
