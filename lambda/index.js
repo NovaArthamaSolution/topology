@@ -1,12 +1,11 @@
 const { google } = require("googleapis");
-require('dotenv').config();
-const sa_keys = require(process.env.SA_KEY_FILE);
+const creds = JSON.parse(atob(process.env.SA_KEY_FILE))
 
 // Or embed it directly
 exports.main = async (event) => {
     try {
         const auth = new google.auth.GoogleAuth({
-                keyFile: './monitoring-imigrasi.json', // Replace with the actual path
+                credentials: creds,
                 scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'], // Or .spreadsheets for write access
             });
 
@@ -20,26 +19,16 @@ exports.main = async (event) => {
             });
           
     
-        // const data = [];
-        // const [startRow, startCol, endRow, endCol] = parseRange(response.data.range);
-        // for (let i = startRow; i <= endRow; i++) {
-        //     if (response.data.values[i])
-        //         data.push(response.data.values[i].join(','));
-        // }
-
-        const csvContent = response.data.values.map(row => {
-            row.map(cell => {
-                    // Handle commas or newlines within cell data
-                    if (typeof cell === 'string' && (cell.includes(',') || cell.includes('\n'))) {
-                    return `"${cell.replace(/"/g, '""')}"`; // Escape double quotes
-                    }
-                    return cell;
-                }).join(',')
-            }).join('\n');
-
-        // console.log(csvContent);
-
-
+        const data = [];
+        const [startRow, startCol, endRow, endCol] = parseRange(response.data.range);
+        for (let i = startRow; i <= endRow; i++) {
+            row = response.data.values[i];
+            if (row) {
+                row = row.map(cell => { return (typeof cell === 'string' && (cell.includes(',') || cell.includes('\n'))) ?  `"${cell.replace(/"/g, '""')}"` : cell});
+                data.push(row.join(','));
+            }
+        }
+        console.log(startRow,endRow,data.length);
         return {
             statusCode: 200,
             headers: {
@@ -48,12 +37,11 @@ exports.main = async (event) => {
             },
             body: JSON.stringify({
                 success: true,
-                data: csvContent
+                data: data.join("\n")
             })
         };
 
     }catch(err){
-
         console.error(err);
         return {
             statusCode: 500,
@@ -85,6 +73,6 @@ function columnToIndex(col) {
 }
 
 
-if (process.argv[1].indexOf('test.js') !== -1) {
+if (process.argv[1].indexOf('index.js') !== -1) {
     exports.main({});
 }
