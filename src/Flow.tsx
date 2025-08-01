@@ -193,7 +193,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         const match = positionTag.match(/U(\d+)(?:-(\d+))?/);
         if (match) {
           const unit = Number(match[1]);
-          return { x: nodeLevel * 300 + nodeIndex * 200, y: unit * 50 };
+          return { x: nodeLevel * 300 + nodeIndex * 200, y:  (unit-1) * -45 };
         }
       }
       if (positionTag.startsWith("L") || positionTag.startsWith("R")) {
