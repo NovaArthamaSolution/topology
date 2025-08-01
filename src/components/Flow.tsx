@@ -187,7 +187,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         const match = positionTag.match(/U(\d+)(?:-(\d+))?/);
         if (match) {
           const unit = Number(match[1]);
-          return { x: 300, y: unit * 50 };
+          return { x: 300, y: unit * 45 };
         }
       }
   
