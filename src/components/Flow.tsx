@@ -409,16 +409,16 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     [nodes, edges, currentParentId]
   );
 
-  const goBack = useCallback(() => {
-    if (!history.length) return;
-    const lastState = history[history.length - 1];
-    // @ts-ignore
-    setNodes(lastState.nodes);
-    // @ts-ignore
-    setEdges(lastState.edges);
-    setCurrentParentId(lastState.parentId);
-    setHistory((prev) => prev.slice(0, -1));
-  }, [history, setNodes, setEdges]);
+  // const goBack = useCallback(() => {
+  //   if (!history.length) return;
+  //   const lastState = history[history.length - 1];
+  //   // @ts-ignore
+  //   setNodes(lastState.nodes);
+  //   // @ts-ignore
+  //   setEdges(lastState.edges);
+  //   setCurrentParentId(lastState.parentId);
+  //   setHistory((prev) => prev.slice(0, -1));
+  // }, [history, setNodes, setEdges]);
 
   const handleBreadcrumbClick = useCallback(
     (id: number | null) => {
