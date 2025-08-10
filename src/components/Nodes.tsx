@@ -13,6 +13,8 @@ type CustomNodeProps = {
     bgColor: string;
     borderColor: string;
     children?: AssetNode[];
+    info: any;
+    view_icon: string;
   };
 };
 
@@ -40,19 +42,51 @@ const CustomNode: React.FC<CustomNodeProps> = ({ data }) => {
               alignItems: "center",
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
               cursor: data.children?.length ? "pointer" : "default",
+              height: 100,
             }}
-            className="text-sm font-medium text-foreground"
+            className={`text-sm font-medium text-foreground ${
+              data.view_icon && data.view_icon?.replace(" ", "-")
+            }`}
           >
-            {data.icon && <span style={iconStyles}>{data.icon}</span>}
-            <div>
-              <strong>{data.label}</strong>
-              <div className="text-xs text-muted-foreground">
-                Class: {data.Class}
+            <div className="node-container flex flex-row items-center p-4">
+              {data.icon && <span style={iconStyles}>{data.icon}</span>}
+              <div>
+                <strong>{data.label}</strong>
+                <div className="text-xs text-muted-foreground">
+                  Class: {data.Class}
+                </div>
               </div>
             </div>
           </animated.div>
         </Tooltip.Trigger>
-        {data.children?.length ? (
+        <Tooltip.Portal>
+          <Tooltip.Content
+            className="bg-white border border-gray-200 rounded-md shadow-lg p-2 max-w-xs"
+            side="top"
+            sideOffset={5}
+          >
+            {data?.info ? (
+              <div className="text-sm">
+                <strong>Info</strong>
+                <div
+                  className="mt-1"
+                  dangerouslySetInnerHTML={{ __html: data.info }}
+                />
+              </div>
+            ) : (
+              <div className="text-sm">
+                <strong>Children</strong>
+                <ul className="list-disc pl-4 mt-1">
+                  {data.children?.map((child) => (
+                    <li key={child.NodeId}>{child.Nama_Aset}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <Tooltip.Arrow className="fill-white" />
+          </Tooltip.Content>
+        </Tooltip.Portal>
+        {/* {data.children?.length ? (
           <Tooltip.Portal>
             <Tooltip.Content
               className="bg-white border border-gray-200 rounded-md shadow-lg p-2 max-w-xs"
@@ -60,7 +94,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({ data }) => {
               sideOffset={5}
             >
               <div className="text-sm">
-                <strong>Children:</strong>
+                <strong>Info</strong>
                 <ul className="list-disc pl-4 mt-1">
                   {data.children.map((child) => (
                     <li key={child.NodeId}>{child.Nama_Aset}</li>
@@ -70,7 +104,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({ data }) => {
               <Tooltip.Arrow className="fill-white" />
             </Tooltip.Content>
           </Tooltip.Portal>
-        ) : null}
+        ) : null} */}
       </Tooltip.Root>
     </Tooltip.Provider>
   );

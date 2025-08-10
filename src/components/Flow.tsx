@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useCallback, useMemo, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import {
   ReactFlow,
   Background,
@@ -13,6 +13,7 @@ import {
   type Edge,
   type Connection,
   type NodeMouseHandler,
+  useReactFlow,
 } from "@xyflow/react";
 import {
   FaBuilding,
@@ -30,7 +31,14 @@ import {
   FaChartLine,
   FaGlobe,
   FaShield,
+  FaTemperatureLow,
+  FaTowerCell,
+  FaCloud,
 } from "react-icons/fa6";
+import { TiCloudStorageOutline } from "react-icons/ti";
+import { HiSwitchHorizontal } from "react-icons/hi";
+import { SiLenovo, SiOracle, SiCisco, SiFortinet, SiF5 } from "react-icons/si";
+import { DiRedis } from "react-icons/di";
 import { Button } from "@/components/ui/button";
 import {
   Breadcrumb,
@@ -54,6 +62,11 @@ import CustomNode from "./Nodes";
 import HPEIconAlt from "@/assets/icons/hpe-alt";
 import PostgresIcon from "@/assets/icons/postgresql";
 import MySQLIcon from "@/assets/icons/mysql";
+import VertivIcon from "@/assets/icons/vertiv";
+import FujitsuIcon from "@/assets/icons/fujitsu";
+import GemaltoIcon from "@/assets/icons/gemalto";
+import ServerlessIcon from "@/assets/icons/serverless";
+import IBMIcon from "@/assets/icons/ibm";
 
 export type AssetNode = {
   NodeId: number;
@@ -79,20 +92,28 @@ type HistoryState = {
   parentId: number | null;
 };
 
+const NODE_WIDTH = 200;
+const NODE_HEIGHT = 100;
+const MARGIN_X = 25;
+const MARGIN_Y = 25;
+
 const Flow: React.FC<FlowProps> = ({ data }) => {
-  const [level, setLevel] = useState<number>(1); 
+  const [level, setLevel] = useState<number>(1);
   const [currentParentId, setCurrentParentId] = useState<number | null>(null);
   const [history, setHistory] = useState<HistoryState[]>([]);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const { fitView } = useReactFlow();
 
   const iconMap: Record<string, React.ReactNode> = {
     building: <FaBuilding />,
     aws: <AWSIcon color="#000" width={24} />,
     gcp: <GCPIcon width={24} />,
-    rack: <RackIcon width={24}  />,
-    "dell emc": <DellEmcIcon  height={20} width={80}/>,
+    rack: <RackIcon width={24} />,
+    "dell emc": <DellEmcIcon height={20} width={80} />,
     "hpe proliant": <HPEIconAlt width={80} />,
+    "hpe xp7": <HPEIconAlt width={80} />,
+    hpe: <HPEIconAlt width={80} />,
     postgresql: <PostgresIcon width={24} />,
     compute: <EC2Icon width={24} />,
     kubernetes: <KubernetesIcon width={24} />,
@@ -107,7 +128,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     hand: <FaHand />,
     biometric: <FaFingerprint />,
     dashboard: <FaChartLine />,
-    network: <NetBoxIcon color="black" width={24} />,
+    network: <NetBoxIcon color="#000" width={24} />,
     data: <FaDatabase />,
     www: <FaGlobe />,
     security: <FaShield />,
@@ -115,6 +136,23 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     containment: <ContainmentIcon width={24} />,
     xp7: <HPEIcon color="#FF9900" />,
     mysql: <MySQLIcon width={24} />,
+    cooling: <FaTemperatureLow color="skyblue" />,
+    netpanel: <FaTowerCell />,
+    vertiv: <VertivIcon width={80}  color="#fff" />,
+    fujitsu: <FujitsuIcon width={80} />,
+    gemalto: <GemaltoIcon width={80} />,
+    netswitch: <HiSwitchHorizontal />,
+    lenovo: <SiLenovo />,
+    oracle: <SiOracle />,
+    cisco: <SiCisco size={80} color={'#049fd9'} />,
+    fortinet: <SiFortinet size={50} color={'#DA291C'} />,
+    f5: <SiF5 />,
+    globe: <FaGlobe />,
+    sdwan: <FaCloud />,
+    serverless: <ServerlessIcon width={24} height={24} />,
+    ibm: <IBMIcon width={24} height={24} />,
+    storage: <TiCloudStorageOutline size={50} />,
+    redis: <DiRedis size={50} color="#D82C20" />,
   };
 
   // const classStyleMap: Record<
@@ -172,34 +210,39 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     nodeIndex: number
   ) => {
     if (positionTag && positionTag !== "x,y") {
-      if (positionTag.startsWith("L") ) {
+      if (positionTag.startsWith("L")) {
         const match = positionTag.match(/[LR](\d+)/);
-        if (match)
-          positionTag = match[1] + ":1"
+        if (match) positionTag = match[1] + ":1";
       }
-      if (positionTag.startsWith("R")) { 
+      if (positionTag.startsWith("R")) {
         const match = positionTag.match(/[LR](\d+)/);
-        if (match) 
-          positionTag = match[1] + ":3"
+        if (match) positionTag = match[1] + ":3";
       }
-       
+
       if (positionTag.startsWith("U")) {
         const match = positionTag.match(/U(\d+)(?:-(\d+))?/);
         if (match) {
           const unit = Number(match[1]);
-          return { x: 300, y: unit * -45 };
+          return { x: 300, y: unit * -(NODE_HEIGHT + MARGIN_Y / 2) };
         }
       }
-  
+
       if (positionTag.includes(":")) {
         const [row, col] = positionTag.split(":").map(Number);
         if (!isNaN(row) && !isNaN(col)) {
-          return { x: col * 200, y: row * 100 };
+          return {
+            x: col * (NODE_WIDTH + MARGIN_X),
+            y: row * (NODE_HEIGHT + MARGIN_Y),
+          };
         }
       }
-      
     }
-    return { x: nodeLevel * 300 + nodeIndex * 200, y: 0 };
+    return {
+      x:
+        nodeLevel * (NODE_WIDTH + MARGIN_X * 2) +
+        nodeIndex * (NODE_WIDTH + MARGIN_X),
+      y: 0,
+    };
   };
 
   useEffect(() => {
@@ -242,7 +285,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     return breadcrumbs;
   }, [currentParentId, findNode]);
 
-  useMemo(() => {
+  useEffect(() => {
     const tempNodes: Node[] = [];
     const tempEdges: Edge[] = [];
     const levelCounts: Record<number, number> = {};
@@ -281,8 +324,10 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
           label: node.Nama_Aset,
           Class: node.Class,
           icon: iconMap[node.view_icon] || null,
+          view_icon: node.view_icon,
           children: node.children || [],
           bgColor: "white",
+          info: node.info,
           // ...styles,
         },
         type: "custom",
@@ -336,6 +381,13 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     // @ts-ignore
     setEdges(tempEdges);
   }, [data, level, currentParentId, findNode, setNodes, setEdges]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      fitView({ padding: 0.2, duration: 200 });
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [currentParentId, level, fitView]);
 
   const onNodeClick: NodeMouseHandler = useCallback(
     (_, node) => {
@@ -415,11 +467,11 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         <MiniMap />
       </ReactFlow>
       <div className="absolute top-4 left-4 flex items-center space-x-2">
-        {history.length > 0 && (
+        {/* {history.length > 0 && (
           <Button onClick={goBack} variant="outline" className="text-white">
             Back
           </Button>
-        )}
+        )} */}
         <Breadcrumb>
           <BreadcrumbList>
             {getBreadcrumbs().map((crumb, index) => (
@@ -445,7 +497,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
           className="absolute top-4 right-4 text-white"
           disabled
         >
-        Level: {level}
+          Level: {level}
         </Button>
       )}
     </div>

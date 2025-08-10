@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Papa from "papaparse";
 import _ from "lodash";
 import Flow from "./components/Flow";
+import { ReactFlowProvider } from "@xyflow/react";
 import "./App.css";
 
 type RawData = {
@@ -25,6 +26,7 @@ type Node = {
 
 function App() {
   const [data, setData] = useState<Node[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const processAndCleanData = (rawData: RawData[]): Node[] => {
     return rawData
@@ -61,10 +63,11 @@ function App() {
   };
 
   useEffect(() => {
-    const url = import.meta.env.VITE_CSV_URL || ''
+    setLoading(true);
+    const url = import.meta.env.VITE_CSV_URL || "";
     fetch(url, {
       headers: {
-        'Accept': 'text/csv',
+        Accept: "text/csv",
       },
     })
       .then((response) => {
@@ -81,15 +84,41 @@ function App() {
             const cleanedData = processAndCleanData(result.data);
             const groupedData = groupDataByParentId(cleanedData);
             setData(groupedData);
+            setLoading(false);
           },
-          error: (err: { message: string }) =>
-            console.log(`Error parsing CSV: ${err?.message}`),
+          error: (err: { message: string }) => {
+            console.log(`Error parsing CSV: ${err?.message}`);
+            setLoading(false);
+          },
         });
       })
-      .catch((err) => console.log(`Error fetching CSV: ${err.message}`));
+      .catch((err) => {
+        console.log(`Error fetching CSV: ${err.message}`);
+        setLoading(false);
+      });
   }, []);
-  // @ts-expect-error
-  return <div id="app">{data && <Flow data={data} />}</div>;
+
+  return (
+    <div id="app">
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-12 h-12 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+            <span className="text-white text-lg font-medium">
+              Rendering Data....
+            </span>
+          </div>
+        </div>
+      )}
+
+      {data && (
+        <ReactFlowProvider>
+          {/* @ts-ignore */}
+          <Flow data={data} />
+        </ReactFlowProvider>
+      )}
+    </div>
+  );
 }
 
 export default App;
