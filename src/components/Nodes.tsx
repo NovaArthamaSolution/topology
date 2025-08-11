@@ -44,7 +44,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({ data }) => {
               cursor: data.children?.length ? "pointer" : "default",
               height: 100,
             }}
-            className={`text-sm font-medium text-foreground ${
+            className={`text-sm font-medium text-foreground ${data?.Class ? data?.Class?.toLowerCase().replace(" ", "-") : ""} ${
               data.view_icon && data.view_icon?.replace(" ", "-")
             }`}
           >
