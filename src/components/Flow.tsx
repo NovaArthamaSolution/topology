@@ -84,8 +84,8 @@ type HistoryState = {
 
 const NODE_WIDTH = 200;
 const NODE_HEIGHT = 50; // Adjusted for thinner nodes
-const MARGIN_X = 25;
-const MARGIN_Y = 0; // Reduced margin for denser layout
+const MARGIN_X = 100;
+const MARGIN_Y = 10; // Reduced margin for denser layout
 const U_HEIGHT = 100; // Each unit height matches node height
 const RACK_HEIGHT = 42 * U_HEIGHT; // Full rack height
 const LABEL_WIDTH = 30; // Width for unit labels
