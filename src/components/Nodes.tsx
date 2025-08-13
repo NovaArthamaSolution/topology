@@ -15,6 +15,7 @@ type CustomNodeProps = {
     children?: AssetNode[];
     info: any;
     view_icon: string;
+    height?: number; // Dynamic height for multi-U
   };
 };
 
@@ -42,7 +43,7 @@ const CustomNode: React.FC<CustomNodeProps> = ({ data }) => {
               alignItems: "center",
               boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
               cursor: data.children?.length ? "pointer" : "default",
-              height: 100,
+              height: data.height || 100,
             }}
             className={`text-sm font-medium text-foreground ${data?.Class ? data?.Class?.toLowerCase().replace(" ", "-") : ""} ${
               data.view_icon && data.view_icon?.replace(" ", "-")
@@ -86,25 +87,6 @@ const CustomNode: React.FC<CustomNodeProps> = ({ data }) => {
             <Tooltip.Arrow className="fill-white" />
           </Tooltip.Content>
         </Tooltip.Portal>
-        {/* {data.children?.length ? (
-          <Tooltip.Portal>
-            <Tooltip.Content
-              className="bg-white border border-gray-200 rounded-md shadow-lg p-2 max-w-xs"
-              side="top"
-              sideOffset={5}
-            >
-              <div className="text-sm">
-                <strong>Info</strong>
-                <ul className="list-disc pl-4 mt-1">
-                  {data.children.map((child) => (
-                    <li key={child.NodeId}>{child.Nama_Aset}</li>
-                  ))}
-                </ul>
-              </div>
-              <Tooltip.Arrow className="fill-white" />
-            </Tooltip.Content>
-          </Tooltip.Portal>
-        ) : null} */}
       </Tooltip.Root>
     </Tooltip.Provider>
   );
