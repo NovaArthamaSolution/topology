@@ -389,16 +389,16 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         style={{
           width: data.width,
           height: data.height,
-          border: "2px solid green",
+          border: "2px solid darkgrey",
           borderRadius: "8px",
-          background: "rgba(0, 255, 0, 0.1)",
+          background: "rgba(124, 124, 124, 0.1)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           paddingTop: "10px",
         }}
       >
-        <div className="text-sm font-bold text-black mb-2">{data.label}</div>
+        <div className="text-2xl font-bold text-black mb-2">{data.label}</div>
         <div style={{ display: "flex", flexDirection: "column-reverse", width: "100%", height: RACK_HEIGHT }}>
           {Array.from({ length: 42 }, (_, i) => {
             const unit = i + 1; // U1 at bottom, U42 at top
