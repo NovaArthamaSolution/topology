@@ -162,6 +162,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
         const match = positionTag.match(/U(\d+)(?:-(\d+))?/);
         if (match) {
           const startUnit = Number(match[1]);
+          // @ts-ignore
           const endUnit = match[2] ? Number(match[2]) : startUnit;
           const y = (42 - startUnit) * U_HEIGHT; // Position at the bottom of the range
           return { x: LABEL_WIDTH, y }; // Offset for label column
@@ -211,6 +212,7 @@ const Flow: React.FC<FlowProps> = ({ data }) => {
     const processNode = (
       node: AssetNode,
       inferredLevel: number = node.level || 1,
+      // @ts-ignore
       nodeIndex: number
     ) => {
       const nodeLevel = node.level ?? inferredLevel;
