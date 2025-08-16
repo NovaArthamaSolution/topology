@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState, useEffect } from "react";
-import Papa from "papaparse";
 import _ from "lodash";
 import Flow from "./components/Flow";
 import { ReactFlowProvider } from "@xyflow/react";
 import "./App.css";
 
-type RawData = {
-  [key: string]: string;
-};
+// type RawData = {
+//   [key: string]: string;
+// };
 
 type Node = {
   NodeId: number | null;
@@ -28,39 +27,39 @@ function App() {
   const [data, setData] = useState<Node[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const processAndCleanData = (rawData: RawData[]): Node[] => {
-    return rawData
-      .map(
-        (row): Node => ({
-          NodeId: row["NodeId"] ? parseInt(row["NodeId"], 10) : null,
-          Nama_Aset: row["Nama Aset"] || "",
-          No_Aset: row["No Aset"] || "",
-          Class: row["Class"] || "",
-          parentId: row["parentId"] ? parseInt(row["parentId"], 10) : null,
-          position_tag: row["position_tag"] || "",
-          view_icon: row["view_icon"] || "",
-          grouping: row["grouping"] || "",
-          info: row["info"] || "",
-          level: row["level"] ? parseInt(row["level"], 10) : null,
-        })
-      )
-      .filter((row) => row.NodeId !== null);
-  };
+  // const processAndCleanData = (rawData: RawData[]): Node[] => {
+  //   return rawData
+  //     .map(
+  //       (row): Node => ({
+  //         NodeId: row["NodeId"] ? parseInt(row["NodeId"], 10) : null,
+  //         Nama_Aset: row["Nama Aset"] || "",
+  //         No_Aset: row["No Aset"] || "",
+  //         Class: row["Class"] || "",
+  //         parentId: row["parentId"] ? parseInt(row["parentId"], 10) : null,
+  //         position_tag: row["position_tag"] || "",
+  //         view_icon: row["view_icon"] || "",
+  //         grouping: row["grouping"] || "",
+  //         info: row["info"] || "",
+  //         level: row["level"] ? parseInt(row["level"], 10) : null,
+  //       })
+  //     )
+  //     .filter((row) => row.NodeId !== null);
+  // };
 
-  const groupDataByParentId = (cleanedData: Node[]): Node[] => {
-    const grouped = _.groupBy(cleanedData, (row) =>
-      row.parentId === null ? "root" : row.parentId
-    );
+  // const groupDataByParentId = (cleanedData: Node[]): Node[] => {
+  //   const grouped = _.groupBy(cleanedData, (row) =>
+  //     row.parentId === null ? "root" : row.parentId
+  //   );
 
-    const buildHierarchy = (node: Node): Node => ({
-      ...node,
-      children: (grouped[node.NodeId!] || []).map((child) =>
-        buildHierarchy(child)
-      ),
-    });
+  //   const buildHierarchy = (node: Node): Node => ({
+  //     ...node,
+  //     children: (grouped[node.NodeId!] || []).map((child) =>
+  //       buildHierarchy(child)
+  //     ),
+  //   });
 
-    return (grouped["root"] || []).map((node) => buildHierarchy(node));
-  };
+  //   return (grouped["root"] || []).map((node) => buildHierarchy(node));
+  // };
 
   useEffect(() => {
     setLoading(true);
