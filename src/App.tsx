@@ -64,33 +64,37 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    const url = "https://top.novaarthama.com/data.csv";
+    const url = "https://i7plhatethomcitjx7i3qkrkxy0eflzh.lambda-url.ap-southeast-1.on.aws";
     fetch(url, {
-      headers: {
-        Accept: "text/csv",
-      },
+      // headers: {
+      //   Accept: "text/csv",
+      // },
     })
       .then((response) => {
         if (!response.ok) throw new Error("Failed to fetch CSV");
-        return response.text();
+        // return response.text();
+        return response;
       })
-      .then((csvText) => {
-        Papa.parse(csvText, {
-          header: true,
-          skipEmptyLines: true,
-          transformHeader: (header) => header.trim().replace(/^"|"$/g, ""),
-          transform: (value) => value.trim().replace(/^"|"$/g, ""),
-          complete: (result: Papa.ParseResult<RawData>) => {
-            const cleanedData = processAndCleanData(result.data);
-            const groupedData = groupDataByParentId(cleanedData);
-            setData(groupedData);
-            setLoading(false);
-          },
-          error: (err: { message: string }) => {
-            console.log(`Error parsing CSV: ${err?.message}`);
-            setLoading(false);
-          },
-        });
+      .then((res) => {
+        // Papa.parse(csvText, {
+        //   header: true,
+        //   skipEmptyLines: true,
+        //   transformHeader: (header) => header.trim().replace(/^"|"$/g, ""),
+        //   transform: (value) => value.trim().replace(/^"|"$/g, ""),
+        //   complete: (result: Papa.ParseResult<RawData>) => {
+        //     const cleanedData = processAndCleanData(result.data);
+        //     const groupedData = groupDataByParentId(cleanedData);
+        //     setData(groupedData);
+        //     setLoading(false);
+        //   },
+        //   error: (err: { message: string }) => {
+        //     console.log(`Error parsing CSV: ${err?.message}`);
+        //     setLoading(false);
+        //   },
+        // res.data is json
+        // @ts-ignore
+        setData(res?.data || []);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(`Error fetching CSV: ${err.message}`);
