@@ -64,7 +64,7 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    const url = import.meta.env.VITE_CSV_URL || "";
+    const url = "https://top.novaarthama.com/data.csv";
     fetch(url, {
       headers: {
         Accept: "text/csv",
