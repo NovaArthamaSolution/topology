@@ -65,9 +65,10 @@ function App() {
     setLoading(true);
     const url = "https://i7plhatethomcitjx7i3qkrkxy0eflzh.lambda-url.ap-southeast-1.on.aws";
     fetch(url, {
-      // headers: {
-      //   Accept: "text/csv",
-      // },
+      headers: {
+        Accept: "application/json",
+        'Access-Control-Allow-Origin': 'https://top.novaarthama.com',
+      },
     })
       .then((response) => {
         if (!response.ok) throw new Error("Failed to fetch CSV");
