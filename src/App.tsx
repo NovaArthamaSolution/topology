@@ -66,14 +66,18 @@ function App() {
         },
       })
       .then((response) => {
+        console.log('response',response)
         const rawData = response?.data;
         // const rawData = resData?.data; // Assuming the JSON response is an array of Node objects
         const cleanedData = processAndCleanData(rawData);
         const groupedData = groupDataByParentId(cleanedData);
+        console.log('cleanedData',cleanedData)
+        console.log('groupedData',groupedData)
         setData(groupedData);
         setLoading(false);
       })
       .catch((err) => {
+        console.log('err',err)
         console.log(`Error fetching JSON: ${err.message}`);
         setLoading(false);
       });
