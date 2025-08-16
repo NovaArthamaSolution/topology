@@ -67,7 +67,7 @@ function App() {
       })
       .then((response) => {
         console.log('response',response)
-        const rawData = response?.data;
+        const rawData = response?.data?.data;
         // const rawData = resData?.data; // Assuming the JSON response is an array of Node objects
         const cleanedData = processAndCleanData(rawData);
         const groupedData = groupDataByParentId(cleanedData);
