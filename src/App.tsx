@@ -67,7 +67,6 @@ function App() {
     fetch(url, {
       headers: {
         Accept: "application/json",
-        'Access-Control-Allow-Origin': 'https://top.novaarthama.com',
       },
     })
       .then((response) => {
