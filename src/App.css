@@ -11,7 +11,10 @@ body {
   height: 100vh;
 }
 
-.hpe, .hpe-proliant, .xp7, .hpe-xp7 {
+.hpe,
+.hpe-proliant,
+.xp7,
+.hpe-xp7 {
   background-image: url("/bg/hpe-bg.jpeg") !important;
   background-size: cover !important;
   background-position: center !important;
@@ -38,8 +41,10 @@ body {
   justify-content: center !important;
   color: white !important;
 }
-.netswitch, .switch ,.netpanel {
-  background-image: url("/bg/switch-bg.png") !important;
+.netswitch,
+.switch,
+.netpanel {
+  background-image: url("/bg/netpanel-bg.jpeg") !important;
   background-size: cover !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
@@ -48,7 +53,7 @@ body {
   color: white !important;
 }
 .purestorage {
-  background-image: url("/bg/storage-bg.png") !important;
+  background-image: url("/bg/purestorage-bg.jpeg") !important;
   background-size: contain !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
@@ -56,9 +61,54 @@ body {
   justify-content: center !important;
   color: white !important;
 }
-.hpe .node-container, 
-.hpe-proliant .node-container, 
-.xp7 .node-container, 
+.hitachi {
+  background-image: url("/bg/hitachi-bg.jpeg") !important;
+  background-size: contain !important;
+  background-position: left !important;
+  background-repeat: no-repeat !important;
+  width: 500px !important;
+  justify-content: center !important;
+  color: white !important;
+}
+.infoblox {
+  background-image: url("/bg/infoblox-bg.jpeg") !important;
+  background-size: contain !important;
+  background-position: left !important;
+  background-repeat: no-repeat !important;
+  width: 500px !important;
+  justify-content: center !important;
+  color: white !important;
+}
+.paloalto {
+  background-image: url("/bg/paloalto-bg.jpeg") !important;
+  background-size: contain !important;
+  background-position: left !important;
+  background-repeat: no-repeat !important;
+  width: 500px !important;
+  justify-content: center !important;
+  color: white !important;
+}
+.f5 {
+  background-image: url("/bg/f5-bg.jpeg") !important;
+  background-size: contain !important;
+  background-position: left !important;
+  background-repeat: no-repeat !important;
+  width: 500px !important;
+  justify-content: center !important;
+  color: white !important;
+}
+.fortinet {
+  background-image: url("/bg/fortinet-bg.jpeg") !important;
+  background-size: contain !important;
+  background-position: left !important;
+  background-repeat: no-repeat !important;
+  width: 500px !important;
+  justify-content: center !important;
+  color: white !important;
+}
+.hpe .node-container,
+.hpe-proliant .node-container,
+.xp7 .node-container,
 .dell-emc .node-container,
 .netswitch .node-container,
 .vertiv .node-container {
