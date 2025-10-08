@@ -54,7 +54,7 @@ body {
 }
 .purestorage {
   background-image: url("/bg/purestorage-bg.jpeg") !important;
-  background-size: contain !important;
+  background-size: cover !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
   width: 500px !important;
@@ -63,7 +63,7 @@ body {
 }
 .hitachi {
   background-image: url("/bg/hitachi-bg.jpeg") !important;
-  background-size: contain !important;
+  background-size: cover !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
   width: 500px !important;
@@ -72,7 +72,7 @@ body {
 }
 .infoblox {
   background-image: url("/bg/infoblox-bg.jpeg") !important;
-  background-size: contain !important;
+  background-size: cover !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
   width: 500px !important;
@@ -81,7 +81,7 @@ body {
 }
 .paloalto {
   background-image: url("/bg/paloalto-bg.jpeg") !important;
-  background-size: contain !important;
+  background-size: cover !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
   width: 500px !important;
@@ -90,7 +90,7 @@ body {
 }
 .f5 {
   background-image: url("/bg/f5-bg.jpeg") !important;
-  background-size: contain !important;
+  background-size: cover !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
   width: 500px !important;
@@ -99,7 +99,7 @@ body {
 }
 .fortinet {
   background-image: url("/bg/fortinet-bg.jpeg") !important;
-  background-size: contain !important;
+  background-size: cover !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
   width: 500px !important;
