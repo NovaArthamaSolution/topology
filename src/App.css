@@ -39,7 +39,7 @@ body {
   color: white !important;
 }
 .netswitch, .switch ,.netpanel {
-  background-image: url("/bg/switch-bg.jpeg") !important;
+  background-image: url("/bg/switch-bg.png") !important;
   background-size: cover !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
@@ -49,7 +49,7 @@ body {
 }
 .purestorage {
   background-image: url("/bg/storage-bg.png") !important;
-  background-size: cover !important;
+  background-size: contain !important;
   background-position: left !important;
   background-repeat: no-repeat !important;
   width: 500px !important;
