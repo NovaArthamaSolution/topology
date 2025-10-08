@@ -38,7 +38,7 @@ body {
   justify-content: center !important;
   color: white !important;
 }
-.netswitch {
+.netswitch, .switch ,.netpanel {
   background-image: url("/bg/switch-bg.jpeg") !important;
   background-size: cover !important;
   background-position: left !important;
