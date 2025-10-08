@@ -47,6 +47,15 @@ body {
   justify-content: center !important;
   color: white !important;
 }
+.purestorage {
+  background-image: url("/bg/switch-bg.jpeg") !important;
+  background-size: cover !important;
+  background-position: left !important;
+  background-repeat: no-repeat !important;
+  width: 500px !important;
+  justify-content: center !important;
+  color: white !important;
+}
 .hpe .node-container, 
 .hpe-proliant .node-container, 
 .xp7 .node-container, 
